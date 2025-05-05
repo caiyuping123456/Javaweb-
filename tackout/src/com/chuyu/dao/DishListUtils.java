@@ -66,4 +66,111 @@ public class DishListUtils {
         }
         return list;
     }
+
+    public static List<DishListVO> selectAllDish() {
+        List<DishListVO> list = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        connection = jdbcUtils.getConnetion();
+        String sql = "select * from dishlist";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String dishlistid = resultSet.getString("dishlistid");
+                String username = resultSet.getString("username");
+                String phone = resultSet.getString("phone");
+                String address = resultSet.getString("address");
+                double sumprice = resultSet.getDouble("sumprice");
+                int status = resultSet.getInt("status");
+                int userid = resultSet.getInt("userid");
+                DishListVO dishListVO = new DishListVO(dishlistid, username, phone, address, sumprice, status, userid);
+                list.add(dishListVO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            jdbcUtils.close(connection,preparedStatement,resultSet);
+        }
+        return list;
+    }
+
+    public static List<DishListVO> selectDishListById(String dishListId) {
+        List<DishListVO> list = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        connection = jdbcUtils.getConnetion();
+        String sql = "select * from dishlist where dishlistid = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,dishListId);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String dishlistid = resultSet.getString("dishlistid");
+                String username = resultSet.getString("username");
+                String phone = resultSet.getString("phone");
+                String address = resultSet.getString("address");
+                double sumprice = resultSet.getDouble("sumprice");
+                int status = resultSet.getInt("status");
+                int userid = resultSet.getInt("userid");
+                DishListVO dishListVO = new DishListVO(dishlistid, username, phone, address, sumprice, status, userid);
+                list.add(dishListVO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            jdbcUtils.close(connection,preparedStatement,resultSet);
+        }
+        return list;
+    }
+
+    public static List<DishListVO> selectDishListByStatus(int status) {
+        List<DishListVO> list = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        connection = jdbcUtils.getConnetion();
+        String sql = "select * from dishlist where status = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,status);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String dishlistid = resultSet.getString("dishlistid");
+                String username = resultSet.getString("username");
+                String phone = resultSet.getString("phone");
+                String address = resultSet.getString("address");
+                double sumprice = resultSet.getDouble("sumprice");
+                int status1 = resultSet.getInt("status");
+                int userid = resultSet.getInt("userid");
+                DishListVO dishListVO = new DishListVO(dishlistid, username, phone, address, sumprice, status1, userid);
+                list.add(dishListVO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            jdbcUtils.close(connection,preparedStatement,resultSet);
+        }
+        return list;
+    }
+
+    public static void updateDishList(String orderId, int status) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        connection = jdbcUtils.getConnetion();
+        String sql = "update dishlist set status = ? where dishlistid = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,status);
+            preparedStatement.setString(2,orderId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            jdbcUtils.close(connection,preparedStatement,resultSet);
+        }
+    }
 }

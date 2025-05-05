@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb_School.iml" filepath="$PROJECT_DIR$/JavaWeb_School.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aaa/aaa.iml" filepath="$PROJECT_DIR$/aaa/aaa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tackout/tackout.iml" filepath="$PROJECT_DIR$/tackout/tackout.iml" />
+    </modules>
+  </component>
+</project>

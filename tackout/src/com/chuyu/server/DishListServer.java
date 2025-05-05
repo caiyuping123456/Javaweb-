@@ -29,4 +29,19 @@ public class DishListServer {
     }
 
 
+    public static List<DishListVO> selectAllDish() {
+        return DishListUtils.selectAllDish();
+    }
+
+    public static List<DishListVO> selectDishListById(String dishListId) {
+        return DishListUtils.selectDishListById(dishListId);
+    }
+
+    public static List<DishListVO> selectDishListByStatus(int status) {
+        return DishListUtils.selectDishListByStatus(status);
+    }
+
+    public static void updateDishList(String orderId, int status) {
+        DishListUtils.updateDishList(orderId,status);
+    }
 }
